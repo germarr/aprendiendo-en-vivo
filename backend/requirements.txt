@@ -1,0 +1,6 @@
+fastapi
+Jinja2
+pandas
+psycopg2-binary
+uvicorn[standard]
+sqlmodel
