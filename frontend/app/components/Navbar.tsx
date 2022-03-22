@@ -1,18 +1,39 @@
 import { Disclosure, Menu } from '@headlessui/react'
 import {  MenuIcon, XIcon } from '@heroicons/react/outline'
+import React from 'react'
 import { Link } from 'remix'
  
-const navigation = [
+const nav = [
    { name: 'Home', href: '/', current: false },
    { name: 'Projects', href: '/proyectos', current: false },
    { name: 'Blog', href: '/aprendiendo', current: false }
  ]
+
+const navES = [
+  { name: 'Inicio', href: '/', current: false },
+  { name: 'Proyectos', href: '/proyectos', current: false },
+  { name: 'Blog', href: '/aprendiendo', current: false }
+]
 
  function classNames(...classes:any){
      return classes.filter(Boolean).join("")
  }
  
 export default function Navbar() {
+  const [state, setState] = React.useState("");
+  let navigation:any;
+
+  React.useEffect(() => {
+    let lang:string = navigator.language
+    setState(lang)
+  }, [state]);
+
+  if(state != "en"){
+    navigation= navES
+  }else{
+    navigation = nav
+  }
+
    return (
        <Disclosure as="nav" className="bg-gray-800">
          {({ open }) => (
