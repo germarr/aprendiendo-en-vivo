@@ -8,6 +8,7 @@ import {
 } from "remix";
 import type { MetaFunction } from "remix";
 import Navbar from "./components/Navbar";
+import Bottombar from "./components/Bottombar";
 
 export const meta: MetaFunction = () => {
   return { title: "GMARR | Aprendiendo en Público." };
@@ -25,13 +26,14 @@ export default function App() {
       </head>
       <body>
         {/* Header and Navbar */}
-        <header>
+        <header className="sticky top-0 z-50">
           <Navbar/> 
         </header> 
         <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        <Bottombar />
       </body>
     </html>
   );
