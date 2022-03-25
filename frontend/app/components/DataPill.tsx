@@ -15,7 +15,7 @@ export default function DataPill({pilldata}) {
         <div className="shadow-md shadow-slate-200 p-4 h-44 grid content-center bg-white rounded-b-md">
             <div className="">
                 <h3 className="font-bold text-lg">{data.titulo}</h3>
-                <p className="font-thin text-lg h-14">{data.desc}</p>
+                <p className="font-thin text-lg h-20 md:h-14">{data.desc}</p>
             </div>
             <div className="gap-y-4 divide-y-2 divide-slate-500/60 pt-2 pb-2">
                 <div></div>

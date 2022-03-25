@@ -7,37 +7,8 @@ import type { Contentpill } from "~/components/DataPill";
 import DataPill from "~/components/DataPill";
 import LastPost from "~/components/LastPost";
 import { getPosts, getSerie } from "~/api/getArticle";
-
-export type Contenido = {
-  titulo:string;
-  subTitulo:string;
-  subTituloDos:string;
-  bloqueUno:string;
-  desc1:{
-    titulo:string;
-    subtitulo:string;
-  },
-  desc2:{
-    titulo:string;
-    subtitulo:string;
-  }
-  desc3:{
-    titulo:string;
-    subtitulo:string;
-  },
-  cv:{
-    tituloUno:string;
-    subtituloUno:string;
-    contenidoUno:string;
-    tituloDos:string;
-    subtituloDos:string;
-    contenidoDos:[{
-      nombre:string;
-      images:string;
-      url_link:string;
-    }];
-  }
-}
+import { api_homepagedata, api_homepagedataEN, api_proyectlist } from "~/api/personalInfo";
+import type { Contenido } from "~/api/personalInfo";
 
 export const links: LinksFunction = () =>{
   return[
@@ -57,115 +28,11 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader:LoaderFunction = async() =>{
-  let homepagedata= {
-    titulo:"hola 👋",
-    subTitulo:"soy gerardo m.",
-    subTituloDos:"web apps & data analytics.",
-    bloqueUno:"¿a que me dedico?",
-    desc1:{
-      titulo:"analisis de datos",
-      subtitulo:"python, r y sql son mis herraminetas favoritas."
-    },
-    desc2:{
-      titulo:"business intelligence",
-      subtitulo:"excel, power bi y tableau. de =sum() a DAX"
-    },
-    desc3:{
-      titulo:"marketing digital",
-      subtitulo:"administrando anuncios de facebook y google desde el 2013"
-    },
-    cv:{
-      tituloUno:"¿quien soy?",
-      subtituloUno:"Entusiaste del analisis de los datos. Actualmente viviendo en New Jersey, pero nacido en la Cd. de Méxcio.",
-      contenidoUno:"Pendiente ...",
-      tituloDos:"tecnologías favoritas",
-      subtituloDos:"la mayoría de mis proyectos usan:",
-      contenidoDos:[
-        {nombre:"postgresql",
-        images:"https://gmarrstorage.blob.core.windows.net/images/postgreslogo.png",
-        url_link:"https://google.com"}],
-    }
-  }
+  let homepagedata= api_homepagedata
 
-  let homepagedataEN= {
-    titulo:"hello 👋 i am",
-    subTitulo:"gerardo m.",
-    subTituloDos:"web apps & data analytics.",
-    bloqueUno:"what i do?",
-    desc1:{
-      titulo:"data analysis",
-      subtitulo:"python, r and sql are my tools of choice"
-    },
-    desc2:{
-      titulo:"business intelligence",
-      subtitulo:"excel, power bi and tableau. from =sum() to DAX"
-    },
-    desc3:{
-      titulo:"digital marketing",
-      subtitulo:"managing faceboo and google ads since 2013"
-    },
-    cv:{
-      tituloUno:"who am i?",
-      subtituloUno:"Data Enthusiast. Currently Living in the 🇺🇸 but originally from 🇲🇽",
-      contenidoUno:"I've spent the last 7 years working in digital strategy, business intelligence and marketing analytics.\n\n From 2012 to 2019 I got the awesome opportunity to work for 2 of the most popular automotive brands in the world and on 2020, while finishing my master's degree, I changed gears and went on to do consulting work for Rappi (one of Latam's biggest startups) and Planet Fitness (one of the largest gym chains in the US).\n\n Currently I'm working for Corsair as a Marketing Analytics specialist for their E-commerce platform.",
-      tituloDos:"favorite tech",
-      subtituloDos:"most of my projects are build with a combination of this tech",
-      contenidoDos:[
-        {nombre:"fastapi",
-        images:"https://gmarrstorage.blob.core.windows.net/images/fastapilogo.png",
-        url_link:"https://google.com"},
-        {nombre:"postgresql",
-        images:"https://gmarrstorage.blob.core.windows.net/images/postgreslogo.png",
-        url_link:"https://google.com"},
-        {nombre:"chartjs",
-        images:"https://gmarrstorage.blob.core.windows.net/images/chartjslogo.png",
-        url_link:"https://google.com"},
-        {nombre:"remix run",
-        images:"https://gmarrstorage.blob.core.windows.net/images/remixlogo.png",
-        url_link:"https://google.com"},
-        {nombre:"powerbi",
-        images:"https://gmarrstorage.blob.core.windows.net/images/powerbilogo.png",
-        url_link:"https://google.com"},
-        {nombre:"python pandas",
-        images:"https://gmarrstorage.blob.core.windows.net/images/pandaslogo.png",
-        url_link:"https://google.com"},
-        {nombre:"react js",
-        images:"https://gmarrstorage.blob.core.windows.net/images/reactlogo.png",
-        url_link:"https://google.com"},
-        {nombre:"tailwindcss",
-        images:"https://gmarrstorage.blob.core.windows.net/images/tailwindlogo.png",
-        url_link:"https://google.com"},
-        {nombre:"supabase",
-        images:"https://gmarrstorage.blob.core.windows.net/images/supabaselogo.png",
-        url_link:"https://google.com"}]
-    }
-  }
+  let homepagedataEN= api_homepagedataEN
 
-  let proyectlist = [{
-    titulo:"Blog 📝",
-    desc:"Checkout my notes about different topics. From Star Wars to Machine Learning.",
-    link:"./aprendiendo.tsx"
-  },{
-    titulo:"Youtube Analyzer 🎞️",
-    desc:"Check the top stats from any Youtube channel in a nice dashboard.",
-    link:"./aprendiendo.tsx"
-  },{
-    titulo:"LegisladoresMX 🏛️",
-    desc:"Look for your congressmen in Mexico with an easier UI.",
-    link:"./aprendiendo.tsx"
-  },{
-    titulo:"Ecobici Dashboard 🚲",
-    desc:"Visualize the top metrics from Mexico's City shared bike program.",
-    link:"./aprendiendo.tsx"
-  },{
-    titulo:"Twitch Dashboard 👾",
-    desc:"Wich are the top Twith streamers, around the world, right now?",
-    link:"./aprendiendo.tsx"
-  },{
-    titulo:"Youtube Dashboard 📽️",
-    desc:"What's popular in Youtube, around the world, tight now?",
-    link:"./aprendiendo.tsx"
-  }]
+  let proyectlist = api_proyectlist
 
   //Get Movie Posts
   const moviePosts = await getPosts()
@@ -203,7 +70,7 @@ export default function Index() {
 
   
   return (
-    <div className="grid grid-cols-1 gap-y-3 md:gap-y-10 mb-10">
+    <div className="grid grid-cols-1 gap-y-3 md:gap-y-5 mb-10">
       
       {/* HEADER */}
       <section>
@@ -214,7 +81,7 @@ export default function Index() {
             </div>
           </div>
           <div className="grid grid-cols-1">
-            <h1 className="font-thin text-3xl md:text-6xl text-black">{contenido.titulo}</h1>
+            <h1 className="font-thin text-3xl md:text-6xl text-black"><span className="animate-pulse">👋</span>{contenido.titulo}</h1>
             <h2 className=" font-bold text-2xl md:text-5xl text-black">{contenido.subTitulo}</h2>
             <div className="bg-pink-800 mt-1">
               <p className=" text-white text-xs md:text-lg font-semibold p-0 md:p-1">{contenido.subTituloDos}</p>
@@ -224,7 +91,7 @@ export default function Index() {
       </section>
 
       {/* What I do? */}
-      <section className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  mt-2 mb-5 py-11">
+      <section className="bg-[url('https://imagesforpersonalsite.s3.us-west-2.amazonaws.com/tokyo4.png')]  mt-2 mb-5 py-11">
           <div className="divide-y-2 divide-yellow-500 lg:mx-96 md:mx-60 mx-12 text-center">
             <div className="flex justify-center py-3">
               <h2 className="text-lg md:text-4xl font-bold text-gray-200">{contenido.bloqueUno} 🤔</h2>
@@ -311,14 +178,15 @@ export default function Index() {
               <h2 className="font-bold text-2xl">{contenido.cv.tituloDos}</h2>
               <div className="bg-gray-800/75 py-1 px-2"><h3 className="text-white font-semibold text-left text-sm md:text-base">{contenido.cv.subtituloDos}</h3></div>
             </div>
+            {/* Favorite Tech */}
             <div className="grid grid-cols-3 gap-4">
               {contenido.cv.contenidoDos.map((e)=>(
-                <a key={e.nombre} href={e.url_link} title={`Logo de ${e.nombre}`} >
-                  <div className="flex items-center justify-center p-3 shadow-md shadow-slate-100">
+                <a key={e.nombre} href={e.url_link} title={`Logo de ${e.nombre}`} className="shadow-md shadow-slate-100">
+                  <div className="flex items-center justify-center p-3">
                     <div className="flex items-center flex-col justify-center space-y-2">
                       <div><p className="text-xs font-semibold">{e.nombre}</p></div>
                       <div>
-                        <img className="object-fill h-14 w-14" src={e.images} alt="" />
+                        <img className={e.css_l} src={e.images} alt="" />
                       </div>
                     </div>
                   </div>
@@ -360,15 +228,15 @@ export default function Index() {
           <div className="mt-4">
             <h2 className="font-bold text-xl"><span className="underline">tech notes</span> 🖥️</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-4 pt-4">
-              <LastPost/>
-              <LastPost/>
+              <LastPost tech={true}/>
+              <LastPost tech={true}/>
             </div>
           </div>
           <div className="mt-4">
             <h2 className="font-bold text-xl"><span className="underline">movies</span> 🍿</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-4 pt-4">
               {pelisContent.map((ob, i)=>(
-                <LastPost key={`peliculas_${i}`}  lafecha={pelisContent[i][4]} eltitulo={pelisContent[i][3]} elcontenido={pelisContent[i][2]} articulo={`/peliculas/${pelisContent[i][0]}`}/>
+                <LastPost tech={false}  key={`peliculas_${i}`} laCalificacion={pelisContent[i][7]} laPlataforma={pelisContent[i][6]}  img_link={pelisContent[i][5]} lafecha={pelisContent[i][4]} eltitulo={pelisContent[i][3]} elcontenido={pelisContent[i][2]} articulo={`/peliculas/${pelisContent[i][0]}`}/>
               ))}
             </div>
           </div>
@@ -376,7 +244,7 @@ export default function Index() {
             <h2 className="font-bold text-xl"><span className="underline">series</span> 📺</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-4 pt-4">
               {seriesContent.map((ob, i)=>(
-                <LastPost key={`series_${i}`}  lafecha={seriesContent[i][4]} eltitulo={seriesContent[i][3]} elcontenido={seriesContent[i][2]} articulo={`/series/${seriesContent[i][0]}`}/>
+                <LastPost tech={false} key={`series_${i}`} laCalificacion={seriesContent[i][7]} laPlataforma={seriesContent[i][6]} img_link={seriesContent[i][5]}  lafecha={seriesContent[i][4]} eltitulo={seriesContent[i][3]} elcontenido={seriesContent[i][2]} articulo={`/series/${seriesContent[i][0]}`}/>
               ))}
             </div>
           </div>

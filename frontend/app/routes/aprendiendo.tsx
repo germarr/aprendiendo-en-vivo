@@ -1,5 +1,6 @@
-import { LinksFunction} from "remix";
+import { LinksFunction, LoaderFunction, Outlet, useLoaderData} from "remix";
 import { Link } from "remix";
+import { api_blogCategories } from "~/api/blogApi";
 import styles from "~/styles/tailwind.css"
 
 //Importar TailwindCSS
@@ -12,20 +13,15 @@ export const links: LinksFunction = () =>{
     ]
   }
 
+
+export const loader:LoaderFunction = async() =>{
+  const blogcat:any = api_blogCategories
+  return blogcat
+}
+
 export default function Index() {
-  const cards:any[] = [
-    {
-      titulo:"¿Que peliculas he visto en el año?",
-      desc:"Peliculas que he visto en lo que va del año.",
-      link:"./peliculas"
-    },
-    {
-      titulo:"¿Que series he visto en el año?",
-      desc:"Series que he visto en lo que va del año.",
-      link:"./series"
-    }
-  ]
-  console.log(cards)
+  const cards = useLoaderData()
+
   return (
     <div>
       <header className="px-10 py-5 bg-gradient-to-r bg-purple-600">
@@ -35,22 +31,22 @@ export default function Index() {
           </Link>
         </h1>
       </header> 
-      <div className="flex flex-col items-center justify-center ">
-        <div>
-        <Link to="./newsletter.tsx">
-          <h1 className="font-semibold text-3xl">Newsletter</h1>
-        </Link>
-        </div>
-      </div>
-      <div>
-        <div className="flex items-center justify-center w-screen h-screen space-x-3">
-          {cards.map((c)=>(
-            <div key={c.link} className="shadow-md shadow-slate-200 p-6 bg-slate-300/30 rounded-md hover:bg-slate-200 cursor-pointer">
-              <Link prefetch="intent" to={c.link} title={c.titulo}>
-                <p className="font-semibold">{c.titulo}</p>
-              </Link>
-            </div>
-          ))}
+      <div className="h-screen">
+        <div className="flex space-x-10">
+          <div className="flex flex-col space-y-6 p-10">
+            {cards.map((n)=>(
+              <div key={n.link}>
+                <Link prefetch="intent" to={n.link}>
+                  <div className="w-48 shadow-md shadow-slate-200 p-6 bg-slate-300/30 rounded-md hover:bg-slate-200 cursor-pointer">
+                    <p className="text-center">{n.titulo}</p>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+          <div>
+            <Outlet/>
+          </div>
         </div>
       </div>
     </div>

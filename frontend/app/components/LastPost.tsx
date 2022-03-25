@@ -1,12 +1,46 @@
 import { Link } from "remix";
 
-export default function LastPost({articulo, eltitulo, elcontenido, lafecha}) {
+export function MediaCards({lafecha, laPlataforma, laCalificacion}){
+    return(
+        <div>
+            <div><p className="text-sm font-semibold">Date: <span className="font-sm font-thin">{lafecha}</span></p></div>
+            <div><p className="text-sm font-semibold">Platform: <span className="font-sm font-thin">{laPlataforma}</span></p></div>
+            <div><p className="text-sm font-semibold">Calif: <span className="font-sm">{`⭐`.repeat(laCalificacion)}</span></p></div>
+        </div>
+    )
+}
+
+export function TechCards({lafecha}){
+    return(
+        <div>
+            <div><p className="text-sm font-semibold">Date: <span className="font-sm font-thin">{lafecha}</span></p></div>
+      </div>
+    )
+}
+
+function Cards(props) {
+    const isLoggedIn = props.isLoggedIn;
+    const fech = props.date;
+    const plat = props.platform;
+    const calif = props.calification
+    
+    if (isLoggedIn) {
+      return <TechCards lafecha={fech}/>;
+    }
+    return <MediaCards lafecha={fech} laPlataforma={plat} laCalificacion={calif}/>;
+  }
+
+export default function LastPost({tech, articulo, eltitulo, elcontenido, lafecha, img_link, laPlataforma, laCalificacion}) {
 
   return (
-    <div className="flex space-x-4 shadow p-5">
+    <div className="flex md:flex-row flex-col space-x-4 shadow p-5">
+        
         {/* Fecha */}
-        <div className="grid content-center">
-            <div><p className="text-base font-semibold">Date: <span className="font-normal">{lafecha}</span></p></div>
+        <div className="grid justify-center content-center md:w-40">
+            {/* <div><p className="text-sm font-semibold">Date: <span className="font-sm font-thin">{lafecha}</span></p></div>
+            <div><p className="text-sm font-semibold">Platform: <span className="font-sm font-thin">{laPlataforma}</span></p></div>
+            <div><p className="text-sm font-semibold">Calif: <span className="font-sm">{`⭐`.repeat(laCalificacion)}</span></p></div> */}
+            <Cards isLoggedIn = {tech} date={lafecha} platform={laPlataforma} calification={laCalificacion}/>
         </div>
 
         <div className="grid grid-cols-2 divide-x-2 divide-slate-500 py-4">
